@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>練習指令</title>
+    <style>
+        /* 建立.red-text，並設文字顏色為red */
+        .red-text {
+            color: red;
+        }
+        /* 建立.bold-text，並設文字為粗體 */
+        .bold-text {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 如果分數等於100顯示good區塊，未達100顯示not-good -->
+        <div v-if="is_100" class="good">太棒了!100分</div>
+        <div v-else class="not-good">再加油</div>
+        <!-- 迴圈渲染列表 -->
+        <ul>
+            <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+        </ul>
+        <!-- 雙向綁定, 輸入文字可寫回message -->
+        <input type="text" v-model="message"/>
+        <div>{{ message }}</div>
+        <!-- 綁定元素樣式 -->
+        <div v-bind:class="classObject">練習綁定文字樣式</div>
+        <!-- 根據資料判定是否顯示/隱藏元素，true為顯示，false為不顯示 -->
+        <div v-show="visible">資料顯示</div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return{
+                    is_100: true,
+                    items: [
+                        { id: 1, name: "甜點"},
+                        { id: 2, name: "麵包"},
+                        { id: 3, name: "咖啡"},
+                    ],
+                    message: '',
+                    classObject: {
+                        'red-text': true,
+                        'bold-text': true,
+                    },
+                    visible: true,
+                }
+            },
+            mounted(){
+                console.log(this.message)
+            }
+        })
+        app.mount('#app')
+    </script>
+</body>
+
+</html>

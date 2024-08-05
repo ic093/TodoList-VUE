@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>使用JavaScript實現雙向綁定</title>
+</head>
+<body>
+  <input type="text" id="input" />
+  <p id="output"></p>
+
+  <script>
+    const input = document.querySelector('#input')
+    const output = document.querySelector('#output')
+
+    // 定義一個名為"model"的對象，用於儲存input元素的值
+    const model = {
+      value: ''
+    }
+
+    // 監聽input元素的input事件，當輸入值發生改變時，同步更新model的值
+    input.addEventListener('input', (event) => {
+      model.value = event.target.value
+    })
+
+    // 監聽model的value屬性的變化，當model的值發生改變時，同步更新output元素的值
+    Object.defineProperty(model, 'value', {
+      get() {
+        return this._value
+      },
+      set(newValue) {
+        this._value = newValue
+        output.textContent = newValue
+      }
+    })
+
+    // 初始化output元素的值
+    output.textContent = model.value
+  </script>
+</body>
+</html>

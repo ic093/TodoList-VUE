@@ -1,0 +1,43 @@
+[{
+        "id": 1,
+        "name": "蜜汁燒烤",
+        "description": "精選豬肉，經過慢火烤製，配上香甜的蜜汁醬汁，口感鮮嫩多汁。",
+        "price": 120,
+        "image": "/images/dish-1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "沙拉",
+        "description": "新鮮的蔬菜搭配特製醬汁和其他配料，是一道健康又美味的開胃菜。",
+        "price": 100,
+        "image": "/images/dish-2.jpg"
+    },
+    {
+        "id": 3,
+        "name": "法式焗蝦",
+        "description": "新鮮的大蝦，配上香料和奶油焗製，搭配脆皮麵包，口感鮮美。",
+        "price": 180,
+        "image": "/images/dish-3.jpg"
+    },
+    {
+        "id": 4,
+        "name": "香煎鵝肝",
+        "description": "精選的鵝肝，經過香煎處理，外皮酥脆，內裡鮮嫩。",
+        "price": 280,
+        "image": "/images/dish-4.jpg"
+    },
+    {
+        "id": 5,
+        "name": "意大利麵",
+        "description": "新鮮的意大利面搭配特製醬汁和香料，絕對是一道美味的主菜。",
+        "price": 150,
+        "image": "/images/dish-5.jpg"
+    },
+    {
+        "id": 6,
+        "name": "黑森林蛋糕",
+        "description": "口感濃郁的朱古力蛋糕，搭配新鮮的水果和淡奶油，是一道絕佳的甜點。",
+        "price": 80,
+        "image": "/images/dish-6.jpg"
+    }
+]
