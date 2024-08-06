@@ -53,7 +53,7 @@ function showMsg(msg){
 </template>
 <style scoped>
 .font30{
-    font-size: 30px;
+    font-size: 40px;
 }
 .font20{
     color:red;
