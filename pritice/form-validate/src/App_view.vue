@@ -1,29 +1,21 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
   <ul>
     <li>
-      <router-link to="/">
-        Pinaia狀態管理
-      </router-link>
+      <router-link to="/"> Pinaia狀態管理 </router-link>
     </li>
     <li>
-      <router-link to="/register">
-        表單驗證
-      </router-link>
+      <router-link to="/register"> 表單驗證 </router-link>
     </li>
     <li>
-      <router-link to="/DataSend">
-        父子組件
-      </router-link>
+      <router-link to="/DataSend"> 父子組件 </router-link>
     </li>
+    <li><router-link to="./Axios">Axios範例</router-link></li>
   </ul>
   <div class="container">
     <router-view></router-view>
   </div>
-
 </template>
 
 <style scoped>
