@@ -76,5 +76,17 @@ export const noteStore = defineStore("notes", {
         this.notes[index].content = content; //如果 id 對應的筆記存在，則更新該筆記的 title 和 content；如果找不到對應的筆記（即 index === -1），則不做任何操作。
       }
     },
+    deleteNote(id) {
+      //this.notes:
+      //this 代表 noteStore 的實例，所以 this.notes 是指 noteStore 裡面的 notes 狀態。
+      //notes 是一個包含多個筆記對象的陣列，這個陣列是定義在 noteStore 的 state 中。
+      //總結:
+      //在這段程式碼中，this 是指向 noteStore 的實例，因此可以用來存取該 store 的狀態和方法。在 deleteNote 方法裡，this.notes 就是指向這個 store 的 notes 狀態。
+
+      const index = this.notes.findIndex((note) => note.id === id);
+      if (index !== -1) {
+        this.notes.splice(index, 1); //splice 方法的第一個參數是要刪除元素的起始位置，第二個參數是要刪除的元素個數。在這裡，splice(index, 1) 表示從 notes 陣列的 index 位置開始，刪除一個元素。
+      }
+    },
   },
 });

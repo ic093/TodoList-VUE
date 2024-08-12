@@ -2,9 +2,46 @@
 import { ref } from "vue";
 import { noteStore } from "../store/noteStore";
 import { storeToRefs } from "pinia";
+
 const todoStore = noteStore();
 const { pinnedNotes } = storeToRefs(todoStore); //只filfter是true的
 const { markedPin } = todoStore; //storeToRefs 是用來將 store 的 state 和 getters 轉換為 Vue 的 ref，從而可以在模板中直接使用並保持響應式。而在你的情況下，你只是在使用 store 中的 action 方法，所以不需要使用 storeToRefs。直接解構並使用 addNote 是完全正確且簡便的方法。
+const { deleteNote } = todoStore;
+let selectedNoteId = null; //起始值為 null，表示一開始沒有選中的筆記。
+
+let selectedNote = ref(""); // 用來儲存選中的筆記
+
+const showDeleteModal = (note) => {
+  selectedNoteId = note.id;
+  //selectedNoteId = note.id;
+  //這行程式碼將傳入的 note 對象的 id 屬性值賦給 selectedNoteId 變數。
+  //這樣就能夠記錄要刪除的筆記的 ID，後續操作會根據這個 ID 來確定哪一個筆記需要被刪除。
+  selectedNote.value = note;
+  //selectedNote.value = note;
+  //這行程式碼將傳入的 note 對象存儲到 selectedNote 中。
+  //由於 selectedNote 是一個 ref，因此我們使用 .value 來訪問和更新其值。
+  //這樣一來，selectedNote 就會保存當前被選中的筆記的完整資訊，而不僅僅是 ID。
+  //在顯示模態框時，可以利用 selectedNote 的值來顯示筆記的詳細資訊，例如標題或內容。
+  const modal = new bootstrap.Modal(document.getElementById("deleteModal"));
+  modal.show();
+};
+
+const checkDelete = () => {
+  const modalElement = document.querySelector("#deleteModal");
+  if (selectedNoteId !== null) {
+    todoStore.deleteNote(selectedNoteId);
+  } else {
+    modalElement.querySelector(".modal-body").innerHTML = "找不到此筆資料!";
+  }
+
+  const modalClose = bootstrap.Modal.getInstance(modalElement);
+  modalClose.hide();
+
+  // const modal = document.getElementById("deleteModal");
+  // modal.classList.remove("show");
+  // document.querySelector(".modal-backdrop").classList.remove("show");
+  // router.push({ name: "add" });
+};
 </script>
 
 <template>
@@ -27,7 +64,10 @@ const { markedPin } = todoStore; //storeToRefs 是用來將 store 的 state 和 
 
           <div class="icon-group d-flex justify-content-between">
             <i class="fa-solid fa-thumbtack" @click="markedPin(pinned.id)"></i>
-            <i class="fa-solid fa-trash-can"></i>
+            <i
+              class="fa-solid fa-trash-can"
+              @click="showDeleteModal(pinned)"
+            ></i>
           </div>
         </li>
       </ul>
@@ -46,10 +86,46 @@ const { markedPin } = todoStore; //storeToRefs 是用來將 store 的 state 和 
 
           <div class="icon-group d-flex justify-content-between">
             <i class="fa-solid fa-thumbtack" @click="markedPin(note.id)"></i>
-            <i class="fa-solid fa-trash-can"></i>
+            <i class="fa-solid fa-trash-can" @click="showDeleteModal(note)"></i>
           </div>
         </li>
       </ul>
+    </div>
+  </div>
+  <div class="modal" tabindex="-1" id="deleteModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">刪除資料</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            是否要刪除
+            <span :style="{ color: 'tomato', fontSize: '20px' }">
+              {{ selectedNote?.title ? selectedNote.title : "" }}
+            </span>
+            這本筆記
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            取消
+          </button>
+          <button type="button" class="btn btn-primary" @click="checkDelete">
+            確定
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
