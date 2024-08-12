@@ -67,5 +67,14 @@ export const noteStore = defineStore("notes", {
 
     //this.notes[index].isPinned = !this.notes[index].isPinned：這行程式碼將筆記的 isPinned 狀態進行反轉。如果當前 isPinned 為 true，則變為 false；如果為 false，則變為 true。
     //這樣，你就可以透過呼叫 markedPin(id) 函數來切換指定 id 的筆記是否被置頂（釘選）。這個功能對於筆記應用程式來說非常實用，因為它允許使用者動態地管理哪些筆記應該被釘選。
+
+    editNote(id, title, content) {
+      //更新資料
+      const index = this.notes.findIndex((note) => note.id === id);
+      if (index !== -1) {
+        this.notes[index].title = title;
+        this.notes[index].content = content; //如果 id 對應的筆記存在，則更新該筆記的 title 和 content；如果找不到對應的筆記（即 index === -1），則不做任何操作。
+      }
+    },
   },
 });

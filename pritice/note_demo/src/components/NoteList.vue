@@ -18,9 +18,13 @@ const { markedPin } = todoStore; //storeToRefs 是用來將 store 的 state 和 
       <ul class="list-group">
         <li
           v-for="pinned in pinnedNotes"
+          :key="pinned.id"
           class="list-group-item d-flex justify-content-between align-items-center"
         >
-          {{ pinned.title }}
+          <router-link :to="{ name: 'edit', params: { id: pinned.id } }">
+            {{ pinned.title }}
+          </router-link>
+
           <div class="icon-group d-flex justify-content-between">
             <i class="fa-solid fa-thumbtack" @click="markedPin(pinned.id)"></i>
             <i class="fa-solid fa-trash-can"></i>
@@ -33,9 +37,13 @@ const { markedPin } = todoStore; //storeToRefs 是用來將 store 的 state 和 
       <ul class="list-group">
         <li
           v-for="note in todoStore.notes"
+          :key="note.id"
           class="list-group-item d-flex justify-content-between"
         >
-          {{ note.title }}
+          <router-link :to="{ name: 'edit', params: { id: note.id } }">
+            {{ note.title }}
+          </router-link>
+
           <div class="icon-group d-flex justify-content-between">
             <i class="fa-solid fa-thumbtack" @click="markedPin(note.id)"></i>
             <i class="fa-solid fa-trash-can"></i>
