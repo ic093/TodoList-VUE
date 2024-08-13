@@ -88,5 +88,13 @@ export const noteStore = defineStore("notes", {
         this.notes.splice(index, 1); //splice 方法的第一個參數是要刪除元素的起始位置，第二個參數是要刪除的元素個數。在這裡，splice(index, 1) 表示從 notes 陣列的 index 位置開始，刪除一個元素。
       }
     },
+    searchNotes(keyword) {
+      this.keyword = keyword.toLowerCase();
+      this.searchResults = this.notes.filter(
+        (note) =>
+          note.title.toLowerCase().includes(this.keyword) ||
+          note.content.toLowerCase().includes(this.keyword)
+      ); //這段代碼將每個 note 的標題轉換為小寫，並檢查其中是否包含 this.keyword（即用戶輸入的關鍵字）。如果包含，該條件為真。
+    },
   },
 });

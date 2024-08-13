@@ -61,7 +61,6 @@ const checkDelete = () => {
           <router-link :to="{ name: 'edit', params: { id: pinned.id } }">
             {{ pinned.title }}
           </router-link>
-
           <div class="icon-group d-flex justify-content-between">
             <i class="fa-solid fa-thumbtack" @click="markedPin(pinned.id)"></i>
             <i
@@ -83,7 +82,7 @@ const checkDelete = () => {
           <router-link :to="{ name: 'edit', params: { id: note.id } }">
             {{ note.title }}
           </router-link>
-
+          <!-- 如果你需要動態地傳遞一個對象（例如包含路由名稱和參數），就必須使用 v-bind 來告訴 Vue 這個屬性值是動態的 。在這裡，to 的值是一個對象，它包含了動態生成的內容（name 和 params）。由於這個對象的值是動態的（即 pinned.id 是一個變數），你必須使用 v-bind，以便 Vue 能夠解析這個對象，並將生成的路由資訊傳遞給 router-link。。靜態的字串，因此不需要使用 v-bind。-->
           <div class="icon-group d-flex justify-content-between">
             <i class="fa-solid fa-thumbtack" @click="markedPin(note.id)"></i>
             <i class="fa-solid fa-trash-can" @click="showDeleteModal(note)"></i>
